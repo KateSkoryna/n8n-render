@@ -1,6 +1,7 @@
 services:
   - type: web
     plan: free
+    region: frankfurt
     runtime: image
     name: n8n-service
 
