@@ -31,6 +31,9 @@ services:
       - key: DB_POSTGRESDB_SSL_ENABLED
         value: "true"
 
+      - key: N8N_RUNNERS_ENABLED
+        value: "false"
+
       # Important: set this manually in Render and keep it forever
       - key: N8N_ENCRYPTION_KEY
         sync: false
@@ -54,4 +57,4 @@ services:
 
       # Limit memory for free Render instance
       - key: NODE_OPTIONS
-        value: --max-old-space-size=400
+        value: --max-old-space-size=320
