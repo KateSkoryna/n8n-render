@@ -13,7 +13,7 @@ services:
         value: postgresdb
 
       - key: DB_POSTGRESDB_HOST
-        value: ep-mute-mud-b1j4fm28-pooler.c-5.eu-central-1.aws.neon.tech
+        value: ep-mute-mud-b1j4fm28.c-5.eu-central-1.aws.neon.tech
 
       - key: DB_POSTGRESDB_PORT
         value: "5432"
