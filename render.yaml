@@ -40,38 +40,36 @@ services:
       - key: N8N_PROXY_HOPS
         value: "1"
 
-      # Automatically generated credentials encryption key
+      # Preserves the existing key; generates one if absent
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
 
-      # PostgreSQL connection
+      # Neon PostgreSQL connection
       - key: DB_TYPE
         value: postgresdb
 
       - key: DB_POSTGRESDB_HOST
-        fromDatabase:
-          name: n8n-db-v1
-          property: host
+        value: ep-mute-mud-b1j4fm28-pooler.c-5.eu-central-1.aws.neon.tech
 
       - key: DB_POSTGRESDB_PORT
-        fromDatabase:
-          name: n8n-db-v1
-          property: port
+        value: "5432"
 
       - key: DB_POSTGRESDB_DATABASE
-        fromDatabase:
-          name: n8n-db-v1
-          property: database
+        value: neondb
 
       - key: DB_POSTGRESDB_USER
-        fromDatabase:
-          name: n8n-db-v1
-          property: user
+        value: neondb_owner
 
+      # Set the actual Neon password manually in Render Environment.
+      # Existing Blueprints do not prompt for sync: false values again.
       - key: DB_POSTGRESDB_PASSWORD
-        fromDatabase:
-          name: n8n-db-v1
-          property: password
+        sync: false
+
+      - key: DB_POSTGRESDB_SSL_ENABLED
+        value: "true"
+
+      - key: DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED
+        value: "true"
 
       # Memory optimization for Render Free
       - key: NODE_OPTIONS
@@ -121,7 +119,6 @@ services:
       - key: EXECUTIONS_DATA_PRUNE_MAX_COUNT
         value: "100"
 
-      # Store binary data in Postgres because Free services have no persistent disk
       - key: N8N_DEFAULT_BINARY_DATA_MODE
         value: database
 
@@ -136,11 +133,3 @@ services:
 
       - key: N8N_BLOCK_ENV_ACCESS_IN_NODE
         value: "true"
-
-databases:
-  - name: n8n-db-v1
-    plan: free
-    region: frankfurt
-    postgresMajorVersion: "17"
-    databaseName: n8n
-    user: n8n
